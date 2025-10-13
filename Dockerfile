@@ -1,11 +1,8 @@
 # Imagen base
-FROM python:3.14-slim
+FROM guscontre1/hola_mundo_base:1
 
 # Establece el directorio de trabajo
 WORKDIR /app
-
-RUN addgroup --system appgroup && adduser --system --group appuser
- 
 
 # Copia el script al contenedor
 COPY app.py .
