@@ -17,6 +17,10 @@ metadata:
 rules:
 - apiGroups: ["", "apps", "autoscaling", "batch", "extensions", "networking.k8s.io", "storage.k8s.io"]
   resources: ["configmaps", "endpoints", "events", "ingresses", "persistentvolumeclaims", "pods", "podtemplates", "replicationcontrollers", "resourcequotas", "secrets", "serviceaccounts", "services", "deployments", "daemonsets", "replicasets", "statefulsets", "horizontalpodautoscalers", "cronjobs", "jobs", "networkpolicies", "storageclasses"]
+  verbs: ["get", "list", "watch"]
+  
+- apiGroups: ["apps"]
+  resources: ["deployments/scale"]
   verbs: ["*"]
 
 ---
