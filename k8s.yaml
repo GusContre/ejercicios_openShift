@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: contenedor-principal
-          image: guscontre1/holamundoclase:2
+          image: guscontre1/holamundoclase:3
           ports:
             - containerPort: 3000
           envFrom:
