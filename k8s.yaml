@@ -28,6 +28,13 @@ spec:
           image: guscontre1/holamundoclase:3
           ports:
             - containerPort: 3000
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "800Mi"
+            limits:
+              cpu: "1000m"
+              memory: "1500Mi"
           envFrom:
             - configMapRef:
                 name: mi-configmap   # <-- OJO: indentado debajo de configMapRef
