@@ -16,20 +16,10 @@ spec:
       labels:
         app: mi-app
     spec:
-      annotations:
-          image.openshift.io/triggers:  |
-            [
-              {
-                "from": {
-                  "kind": "ImageStreamTag",
-                  "name": "ejercicio-codigo-s2i:latest"
-                },
-                "fieldPath": "spec.template.spec.containers[?(@.name==\"contenedor-principal\")].image"
-              }
-            ]
       containers:
         - name: contenedor-principal
           image: image-registry.openshift-image-registry.svc:5000/guscontre-dev/ejercicio-codigo-s2i:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 3000
           resources:
