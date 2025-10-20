@@ -26,7 +26,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ secrets.DOCKER_USERNAME  }}/guscontre1/holamundoclase
+          images: ${{ secrets.DOCKER_USERNAME  }}/holamundoclase
 
       - name: Build Docker image
         uses: docker/build-push-action@v5
