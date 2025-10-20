@@ -18,16 +18,13 @@ spec:
   source:
     type: Git
     git:
-      uri: https://github.com/apbusinessit/ejercicioclase.git
-      ref: master
+      uri: https://github.com/GusContre/ejercicios_openShift.git
+      ref: main
     contextDir: ''
   strategy:
-    type: Source
-    sourceStrategy:
-      from:
-        kind: ImageStreamTag
-        namespace: openshift
-        name: "python:3.12-ubi9"
+    type: Docker
+    dockerStrategy:
+      dockerfilePath: Dockerfile
   output:
     to: 
       kind: ImageStreamTag
