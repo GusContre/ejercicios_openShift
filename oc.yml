@@ -16,9 +16,20 @@ spec:
       labels:
         app: mi-app
     spec:
+      annotations:
+          image.openshift.io/triggers:  |
+            [
+              {
+                "from": {
+                  "kind": "ImageStreamTag",
+                  "name": "ejercicio-codigo-s2i:latest"
+                },
+                "fieldPath": "spec.template.spec.containers[?(@.name==\"contenedor-principal\")].image"
+              }
+            ]
       containers:
         - name: contenedor-principal
-          image: guscontre1/holamundoclase:3
+          image: image-registry.openshift-image-registry.svc:5000/guscontre-dev/ejercicio-codigo-s2i:latest
           ports:
             - containerPort: 3000
           resources:
@@ -68,7 +79,7 @@ data:
 
 --- 
 apiVersion: autoscaling/v2
-kind: horizontalpodautoscalers
+kind: HorizontalPodAutoscaler
 metadata:
   name: mi-hpa
   namespace: guscontre-dev
@@ -77,8 +88,8 @@ spec:
     apiVersion: apps/v1
     kind: deployment
     name: mi-deployment
-  minReplicas: 1
-  maxReplicas: 10
+  minReplicas: 2
+  maxReplicas: 5
   metrics:
   - type: Resource
     resource:
