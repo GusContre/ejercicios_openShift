@@ -27,6 +27,9 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ secrets.DOCKER_USERNAME  }}/holamundoclase
+          tags: |
+            type=raw,value=build-${{ github.run_number }}
+
 
       - name: Build Docker image
         uses: docker/build-push-action@v5
@@ -41,6 +44,9 @@ jobs:
       runs-on: ubuntu-latest
 
       steps:
+        - name: Checkout repository
+          uses: actions/checkout@v4
+
         - name: Install OC CLI
           run: |
             curl -L https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-linux.tar.gz | tar xz
@@ -50,6 +56,18 @@ jobs:
           uses: redhat-actions/oc-login@v1
           with:
             openshift_server_url: https://api.rm1.0a51.p1.openshiftapps.com:6443
-            openshift_token: ${{ secrets.OPENSHIFT_TOKEN }}       
+            openshift_token: ${{ secrets.OPENSHIFT_TOKEN }} 
+        - name : update Deployment tag
+          env:
+            TAG:  build-${{ github.run_number }}
+          run: |
+            envsubst < oc.yaml > oc.tmp
+            mv oc.tmp oc.yaml
+            cat oc.yaml
+
+        - name: Deploy files
+          run: |
+            oc project guscontre-dev
+            oc apply -f oc.yaml     
 
             
