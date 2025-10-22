@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: contenedor-principal
-          image: guscontre1/holamundoclase:{{ tag }}
+          image: guscontre1/holamundoclase:build-{{ tag }} 
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
