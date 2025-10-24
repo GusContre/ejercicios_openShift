@@ -29,11 +29,18 @@ spec:
             limits:
               cpu: "1000m"
               memory: "1500Mi"
-          envFrom:
-            - configMapRef:
-                name: mi-configmap   # <-- OJO: indentado debajo de configMapRef
-            - secretRef:
-                name: mi-secret
+            envFrom:
+              - configMapRef:
+                  name: mi-configmap
+              - secretRef:
+                  name: mi-secret
+            volumeMounts:
+              - name: datos
+                mountPath: "/app/data"
+      volumes:
+        - name: datos
+          persistentVolumeClaim:
+            claimName: mi-pvc
 ---
 apiVersion: v1
 kind: Service
