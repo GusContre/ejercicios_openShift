@@ -13,7 +13,6 @@ RUN pip install requests
 
 RUN chown -R appuser:appgroup /app
 
-
 USER appuser
 # Expone el puerto en el que correrá la app
 EXPOSE 3000
