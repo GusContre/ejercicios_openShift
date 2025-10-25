@@ -11,6 +11,7 @@ COPY app.py .
 RUN pip install flask
 
 RUN chown -R appuser:appgroup /app
+RUN pip install requests
 
 USER appuser
 # Expone el puerto en el que correrá la app
