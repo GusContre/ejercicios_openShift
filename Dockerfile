@@ -9,9 +9,10 @@ COPY app.py .
 
 # Instala Flask
 RUN pip install flask
+RUN pip install requests
 
 RUN chown -R appuser:appgroup /app
-RUN pip install requests
+
 
 USER appuser
 # Expone el puerto en el que correrá la app
